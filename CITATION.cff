@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software in your research, please cite it using the metadata below."
+title: "Get CS Job Trees"
+type: software
+authors:
+  - family-names: "Tüting"
+    given-names: "Christian"
+    affiliation: "Kastritis Laboratory for Biomolecular Research, Martin Luther University Halle-Wittenberg, Germany"
+abstract: "A read-only command-line tool for exporting the upstream processing history of CryoSPARC v5 jobs as complete and compact JSON provenance records."
+keywords:
+  - cryo-EM
+  - CryoSPARC
+  - scientific workflows
+  - data provenance
+  - reproducibility
+license: MIT

@@ -1,0 +1,14 @@
+name: get_cs_tree
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python=3.14
+  - pip
+  - pip:
+      - cryosparc-tools~=5.1.0
+
+variables:
+  DEFAULT_HOST: "10.0.0.1"
+  DEFAULT_PORT: "61000"
