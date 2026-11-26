@@ -139,37 +139,123 @@ The compact JSON preserves every upstream job and its parent relationships while
 | Symmetry expansion | Particle counts and symmetry |
 | Volume-only operations | Generally no additional statistics |
 
-Illustrative compact JSON (job IDs and statistics in this example are fictional):
+Real compact JSON excerpt from project `P41`, target job `J676`. The complete export contains 92 jobs; only 10 selected records are reproduced below for readability. All job IDs, parent references, output keys and numerical values are unchanged from the original export. Parent references may point to jobs omitted from this excerpt.
 
 ```json
 {
-  "project": "P1",
-  "target_job": "J3",
-  "number_of_jobs": 3,
+  "project": "P41",
+  "target_job": "J676",
+  "number_of_jobs": 92,
   "jobs": {
-    "J1": {
-      "job_type": "import_particles",
+    "J36": {
+      "job_type": "import_movies",
       "workspaces": ["W1"],
       "parents": [],
       "statistics": {
-        "particles": {"imported_particles": 200000}
+        "movies": {
+          "imported_movies": 818,
+          "failed_movies": 0
+        }
       }
     },
-    "J2": {
+    "J37": {
+      "job_type": "patch_motion_correction_multi",
+      "workspaces": ["W1"],
+      "parents": ["J36"],
+      "statistics": {
+        "micrographs": {
+          "micrographs": 818,
+          "micrographs_incomplete": 0
+        }
+      }
+    },
+    "J49": {
+      "job_type": "patch_ctf_estimation_multi",
+      "workspaces": ["W2"],
+      "parents": ["J37"],
+      "statistics": {
+        "micrographs": {
+          "exposures": 817,
+          "exposures_incomplete": 1
+        }
+      }
+    },
+    "J78": {
+      "job_type": "blob_picker_gpu",
+      "workspaces": ["W2"],
+      "parents": ["J49"]
+    },
+    "J79": {
+      "job_type": "extract_micrographs_cpu_parallel",
+      "workspaces": ["W2"],
+      "parents": ["J78"],
+      "statistics": {
+        "particles": {
+          "particles": 912263
+        }
+      }
+    },
+    "J80": {
+      "job_type": "class_2D_new",
+      "workspaces": ["W2"],
+      "parents": ["J79"],
+      "statistics": {
+        "particles": {
+          "particles": 910916,
+          "particles_rejected": 1347
+        }
+      }
+    },
+    "J113": {
       "job_type": "select_2D",
       "workspaces": ["W2"],
-      "parents": ["J1"],
+      "parents": ["J80"],
       "statistics": {
-        "particles": {"particles_selected": 150000}
+        "particles": {
+          "particles_excluded": 598178,
+          "particles_selected": 312738
+        }
       }
     },
-    "J3": {
+    "J670": {
       "job_type": "nonuniform_refine_new",
-      "workspaces": ["W2"],
-      "parents": ["J2"],
+      "workspaces": ["W3"],
+      "parents": ["J656", "J669"],
       "statistics": {
-        "particles": {"particles": 150000},
-        "resolution_A": {"volume.resolution": 3.1},
+        "particles": {
+          "particles": 76365,
+          "particles_rejected": 120
+        },
+        "resolution_A": {
+          "volume.fsc_info.radwn_final_A": 1.426,
+          "volume.fsc_info_best.radwn_final_A": 1.426
+        },
+        "symmetry": "C4"
+      }
+    },
+    "J675": {
+      "job_type": "sym_expand",
+      "workspaces": ["W3"],
+      "parents": ["J670"],
+      "statistics": {
+        "particles": {
+          "particles": 305460
+        }
+      }
+    },
+    "J676": {
+      "job_type": "new_local_refine",
+      "workspaces": ["W3"],
+      "parents": ["J670", "J675"],
+      "statistics": {
+        "particles": {
+          "particles": 305460,
+          "particles_rejected": 0
+        },
+        "resolution_A": {
+          "volume.fsc_info.radwn_final_A": 1.425,
+          "volume.fsc_info_best.radwn_final_A": 1.425
+        },
         "symmetry": "C1"
       }
     }
